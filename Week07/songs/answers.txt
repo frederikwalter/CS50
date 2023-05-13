@@ -1,0 +1,3 @@
+- The Audio Aura of the Top 100 songs are a little energetic, quite high in danceabilty but quite sad due to the low valence.
+- Taking the average might not be very suitable as the user might have different styles of music in the list 50 songs with high energy and 50 songs with low energy. Then the medium average energy would not be correct.
+    It will be better to cluster the songs first and then calculate the energy, valence and danceabilty of these clusters. 

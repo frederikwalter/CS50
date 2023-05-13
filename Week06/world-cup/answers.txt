@@ -1,0 +1,19 @@
+Times:
+
+10 simulations: 0m0.026s
+100 simulations: 0m0.027s
+1000 simulations: 0m0.033s
+10000 simulations: 0m0.092s
+100000 simulations: 0m0.753s
+1000000 simulations: 0m7.176s
+
+Questions:
+
+Which predictions, if any, proved incorrect as you increased the number of simulations?:
+
+For small number of simulations the chance of winning for Italy and China in the womans set is changing.
+
+Suppose you're charged a fee for each second of compute time your program uses.
+After how many simulations would you call the predictions "good enough"?:
+
+It seems like the predictions stablized after about 400000 simulations.

@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Feed
+{% endblock title %}
+
+{% block main %}
+<div class="container m-3 text-center">
+    <h1 class="text-center mb-4">Was bisher geschah:</h1>
+</div>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-12 g-4">
+        {% for f in feed_list %}
+        <div class="col-sm-12 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ f.feed.user_name }} hat die Challenge "{{ f.feed.challenge_name }}" abgeschlossen</h5>
+                    <p class="card-text">Dafür gab's einen Bonus von {{ f.feed.bonus }} Minuten</p>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#locationModal{{ f.feed. id }}">
+                        Das will ich sehen!
+                    </button>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ f.elapsed_time }}
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="locationModal{{ f.feed.id }}" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel{{ f.feed.id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="locationModalLabel{{ f.feed.id }}">{{ f.feed.user_name }} hat die Challenge "{{ f.feed.challenge_name }}" abgeschlossen</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% if f.feed.link %}
+                            <img class="card-img-top mb-3" src="{{ f.feed.link }}" alt="{{ f.feed.name }}">
+                        {% else %}
+                            <img class="card-img-top mb-3" src="https://source.unsplash.com/qXakibuQiPU/400x200" alt="Bird">
+                        {% endif %}
+                        <h6>Wann:</h6>
+                        <p class="card-text">{{ f.elapsed_time }}</p>
+                        <h6>Das wurde dazu notiert:</h6>
+                        <p class="card-text">{{ f.feed.notes }}</p>
+                        <h6>Der Zeitbonus dafür ist:</h6>
+                        <p class="card-text">{{ f.feed.bonus }} Minuten</p>
+                        <h6>Hier wurde es vollbracht:</h6>
+                        <p class="card-text">{{ f.feed.location }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main %}
+
+
+{% block scripts %}
+    <script>
+        function performChallenge(challenge_id) {
+            fetch("/perform_challenge/" + challenge_id, { method: "POST" })
+                .then(() => {
+                    alert("Challenge performed!");
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+    </script>
+{% endblock scripts %}
+
+{% block currentPage %}
+    const currentPage = 'feed'
+{% endblock currentPage %}

@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Challenges
+{% endblock title %}
+
+{% block main %}
+<div class="container m-3 text-center">
+    <h1 class="text-center mb-4">Die Challenges</h1>
+    <form action="/challenges" method="post">
+        Sortierung: 
+        <input type="radio" name="sort" value="name"> Alphabetisch  
+        <input type="radio" name="sort" value="bonus"> Nach Zeitbonus
+        <button class="btn btn-primary" type="submit">Sortieren</button>
+    </form>
+</div>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for c in challenges_list %}
+        <div class="col-sm-6 mb-4">
+            <div class="card h-100">
+                {% if c.link %}
+                    <img class="card-img-top" src="{{ c.link }}" alt="{{ c.name }}">
+                {% else %}
+                    <img class="card-img-top" src="https://source.unsplash.com/qXakibuQiPU/400x200" alt="Bird">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ c.name }}</h5>
+                    <p class="card-text">Zeitbonus: {{ c.bonus }} Minuten</p>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#locationModal{{c.id}}">
+                        Mehr Infos
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="locationModal{{c.id}}" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel{{c.id}}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="locationModalLabel{{c.id}}">{{c.name}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% if c.link %}
+                            <img class="card-img-top mb-3" src="{{ c.link }}" alt="{{ c.name }}">
+                        {% else %}
+                            <img class="card-img-top mb-3" src="https://source.unsplash.com/qXakibuQiPU/400x200" alt="Bird">
+                        {% endif %}
+                        <h6>Beschreibung:</h6>
+                        <p class="card-text">{{ c.description }}</p>
+                        <h6>Zeitbonus:</h6>
+                        <p class="card-text">{{ c.bonus }} Minuten</p>
+                        <form action="/complete_challenge" method="post">
+                            <div class="form-group">
+                                <label for="locationInput">Location:</label>
+                                <input type="text" class="form-control" id="locationInput" name="location">
+                            </div>
+                            <div class="form-group">
+                                <label for="notesInput">Notes:</label>
+                                <textarea class="form-control" id="notesInput" rows="3" name="notes"></textarea>
+                            </div>
+                            <input type="hidden" name="challenge_id" value="{{ c.id }}">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main %}
+
+
+{% block scripts %}
+{% endblock scripts %}
+
+{% block currentPage %}
+    const currentPage = 'challenges'
+{% endblock currentPage %}

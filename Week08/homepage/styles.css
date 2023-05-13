@@ -1,0 +1,43 @@
+h1 {
+    color: #EEEEEE;
+    font-size: 3rem;
+    text-align: center;
+    font-weight: 100;
+    margin: 2rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+
+h5 {
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+
+body {
+    background-color: #444444;
+    color: #EEEEEE;
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.5;
+    margin: 0pt;
+    text-align: left;
+}
+ 
+.container-fluid {
+    background-color: #FFFFFF;
+    font-size: 1rem;
+    margin: 0;
+    text-align: left;
+}
+
+.card {
+    color: #000000
+}
+
+.card-text {
+    font-size: 1rem;
+    font-weight: 50;
+}

@@ -1,0 +1,11 @@
+sort1 uses: bubble sort
+
+How do you know?: Because it is fast on the sorted lists but slow on the reversed list.
+
+sort2 uses: merge sort
+
+How do you know?: Similarly fast for all types of lists. More numbers increase the time not as signigifantly as for the other algorithms.
+
+sort3 uses: selection sort
+
+How do you know?: Longer lists increase the required time significantly. None of the sorted lists reveal any benefit.
